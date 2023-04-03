@@ -1,6 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/linux,django,react,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,django,react,windows
-
+outline_ideas.py
 ### Django ###
 *.log
 *.pot
