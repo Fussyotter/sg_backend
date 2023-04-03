@@ -19,7 +19,7 @@ class Supply(models.Model):
     productCode = models.CharField(max_length=150)
     stock = models.IntegerField()
     location = models.CharField(max_length=100)
-
+    # This was a fix to my admin view displaying Supplys
     class Meta:
         verbose_name_plural = "Supplies"
 
