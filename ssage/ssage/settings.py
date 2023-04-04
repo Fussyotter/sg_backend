@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'daphne',
+    'daphne',
     'channels',
     # 'django.contrib.messages',
     'djoser',
@@ -89,6 +89,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ssage.wsgi.application'
+ASGI_APPLICATION = "ssage.asgi.application"
+
 
 
 # Database
