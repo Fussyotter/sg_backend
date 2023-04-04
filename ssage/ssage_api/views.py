@@ -25,3 +25,10 @@ class OrdersByUserView(APIView):
         orders = Order.objects.filter(user__username=username)
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+#  chat test functions
+def index(request):
+    return render(request, "chat/index.html")
+
+
+def room(request, room_name):
+    return render(request, "chat/room.html", {"room_name": room_name})
