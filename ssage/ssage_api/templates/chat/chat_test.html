@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat with a User</title>
+</head>
+<body>
+    <h1>Chat with {{ recipient_username }}</h1>
+    <ul id="chat-messages"></ul>
+
+    <form id="chat-form" action="{% url 'send_message' recipient_username %}" method="post">
+        <input type="text" id="chat-input">
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        var chatSocket = new WebSocket(
+            'ws://' + window.location.host +
+            '/ws/chat/' + '{{ recipient_username }}' + '/');
+
+        chatSocket.onmessage = function(e) {
+            var message = JSON.parse(e.data);
+            var messageElem = document.createElement('li');
+            messageElem
+        }

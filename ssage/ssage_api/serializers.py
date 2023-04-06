@@ -24,8 +24,16 @@ class SupplySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
-    username = serializers.ReadOnlyField(source='user.username')
+    sender_username = serializers.ReadOnlyField(source='sender.username')
+    recipient = serializers.CharField()
 
     class Meta:
         model = Message
-        fields = ['id', 'username', 'content', 'timestamp']
+        fields = ['id', 'sender_username',
+                  'recipient', 'content', 'timestamp']
+
+    def create(self, validated_data):
+        recipient_username = validated_data.pop('recipient_username')
+        recipient = User.objects.get(username=recipient_username)
+        message = Message.objects.create(recipient=recipient, **validated_data)
+        return message

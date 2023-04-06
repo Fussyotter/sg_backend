@@ -1,10 +1,11 @@
+from channels.generic.websocket import WebsocketConsumer
 from channels.generic.websocket import AsyncWebsocketConsumer, WebsocketConsumer
 import json
 from channels.auth import AuthMiddlewareStack
 from channels.db import database_sync_to_async
 from djoser.conf import settings as djoser_settings
 from django.contrib.auth import get_user_model
-from asgiref.sync import sync_to_async
+from asgiref.sync import async_to_sync
 User = get_user_model()
 # following a tutorial guide on this branch
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -160,3 +161,47 @@ class DjoserAuthConsumer(AsyncWebsocketConsumer):
             return user
         except:
             return None
+        
+#  4/6/23 test
+class RealTimeChat(WebsocketConsumer):
+    def connect(self):
+        self.room_name = self.scope['url_route']['kwargs']['room_name']
+        self.room_group_name = 'chat_%s' % self.room_name
+
+        # Join room group
+        async_to_sync(self.channel_layer.group_add)(
+            self.room_group_name,
+            self.channel_name
+        )
+
+        self.accept()
+
+    def disconnect(self, close_code):
+        # Leave room group
+        async_to_sync(self.channel_layer.group_discard)(
+            self.room_group_name,
+            self.channel_name
+        )
+
+    # Receive message from WebSocket
+    def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        message = text_data_json['message']
+
+        # Send message to room group
+        async_to_sync(self.channel_layer.group_send)(
+            self.room_group_name,
+            {
+                'type': 'chat_message',
+                'message': message
+            }
+        )
+
+    # Receive message from room group
+    def chat_message(self, event):
+        message = event['message']
+
+        # Send message to WebSocket
+        self.send(text_data=json.dumps({
+            'message': message
+        }))

@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html>
-    <!-- https://channels.readthedocs.io/en/stable/tutorial/part_2.html -->
 <head>
     <meta charset="utf-8"/>
     <title>Chat Room</title>
 </head>
 <body>
     <p> HEY LOOK AT </MEnu></p>
-    {% for message in messages %}
-        <div>
-            <span>{{ message.user.username }}:</span>
-            <span>{{ message.content }}</span>
-            <span>{{ message.timestamp }}</span>
-        </div>
-    {% endfor %}
     <textarea id="chat-log" cols="100" rows="20"></textarea><br>
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
@@ -31,7 +23,7 @@
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
+            document.querySelector('#chat-log').value += (data.content + '\n');
         };
 
         chatSocket.onclose = function(e) {
@@ -49,7 +41,7 @@
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
-                'message': message
+                'content': message
             }));
             messageInputDom.value = '';
         };
