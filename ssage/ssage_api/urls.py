@@ -9,8 +9,8 @@ urlpatterns = [
     path('v1/', include('djoser.urls')),
     path('v1/', include('djoser.urls.authtoken')),
     path('ws/', include(routing.websocket_urlpatterns)),
-    # path("chat/", views.ChatView.as_view(), name="index"),
     path('chat/<str:recipient_username>/', views.ChatView.as_view()),
+    # path("chat/", views.ChatView.as_view(), name="index"),
     # TESTING ROUTES BELOW
     # path('chat/<str:recipient_username>/',
     #      TemplateView.as_view(template_name='chat/chat_test.html'), name='chat_test'),
