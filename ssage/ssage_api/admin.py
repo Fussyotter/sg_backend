@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
-from .models import Order, Supply
+from .models import Order, Supply, Message
 # Register your models here.
 
 
@@ -15,14 +15,27 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('productName', 'productCode', 'total',)
 
 
+
+
 class OrderInline(admin.TabularInline):
     model = Order.user.through
     extra = 1
 
 
+
+
+class MessageInline(admin.TabularInline):
+    model = Message
+    fields = ['content','recipient', 'timestamp']
+    readonly_fields = ['timestamp']
+    extra = 0
+    fk_name = 'sender'
+
 class CustomUserAdmin(UserAdmin):
-    inlines = [OrderInline]
+    inlines = [OrderInline, MessageInline]
 
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+
+# admin.site.register(Message, MessageAdmin)

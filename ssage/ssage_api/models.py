@@ -24,3 +24,17 @@ class Supply(models.Model):
         verbose_name_plural = "Supplies"
 
     def __str__(self): return self.productName
+
+class Message(models.Model):
+    sender = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='sent_messages', null=True)
+    recipient = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='received_messages', null=True)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-timestamp']
+
+    def __str__(self):
+        return self.content

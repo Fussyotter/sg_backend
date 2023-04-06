@@ -17,8 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from ssage_api import routing
+
 
 urlpatterns = [
     path('', include('ssage_api.urls')),
+    path('ws/', include(routing.websocket_urlpatterns)),
     path('admin/', admin.site.urls),
+   
+
 ]

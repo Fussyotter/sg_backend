@@ -31,11 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
+    # 'django.contrib.messages',
     'djoser',
     'ssage_api',
     'corsheaders',
     'rest_framework.authtoken',
     'rest_framework',
+    'djangochannelsrestframework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'djangochannelsrestframework.middleware.async_xframe_middleware',
+    # 'ssage_api.middlewares.TokenAuthenticationMiddleware'
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -86,6 +93,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ssage.wsgi.application'
+ASGI_APPLICATION = "ssage.asgi.application"
+
 
 
 # Database
@@ -120,6 +129,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 
 # Internationalization

@@ -1,0 +1,26 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat with a User</title>
+</head>
+<body>
+    Who would you like to chat with?<br>
+    <input id="recipient-username-input" type="text" size="100"><br>
+    <input id="start-chat-submit" type="button" value="Start Chat">
+
+    <script>
+        document.querySelector('#recipient-username-input').focus();
+        document.querySelector('#recipient-username-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#start-chat-submit').click();
+            }
+        };
+
+        document.querySelector('#start-chat-submit').onclick = function(e) {
+            var recipientUsername = document.querySelector('#recipient-username-input').value;
+            window.location.pathname = '/chat/' + recipientUsername + '/';
+        };
+    </script>
+</body>
+</html> -->
