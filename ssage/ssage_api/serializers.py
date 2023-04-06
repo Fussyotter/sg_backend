@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Order, Supply
+from .models import Order, Supply, Message
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
@@ -21,3 +21,11 @@ class SupplySerializer(serializers.HyperlinkedModelSerializer):
             model = Supply
             fields = '__all__'
             pluralize = False
+
+
+class MessageSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = Message
+        fields = ['id', 'username', 'content', 'timestamp']

@@ -30,7 +30,7 @@ from django.urls import re_path
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from channels.security.websocket import AllowedHostsOriginValidator
-from ssage_api.routing import websocket_urlpatterns
+import ssage_api.routing
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
@@ -45,7 +45,7 @@ application = ProtocolTypeRouter(
     "websocket": AllowedHostsOriginValidator(
     AuthMiddlewareStack(
         URLRouter(
-            websocket_urlpatterns
+            ssage_api.routing.websocket_urlpatterns
         ))
     )
 })

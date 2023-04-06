@@ -4,9 +4,9 @@ from channels.auth import AuthMiddlewareStack
 from channels.db import database_sync_to_async
 from djoser.conf import settings as djoser_settings
 from django.contrib.auth import get_user_model
-
+from asgiref.sync import sync_to_async
 User = get_user_model()
-
+# following a tutorial guide on this branch
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.channel_layer.group_add(
@@ -85,6 +85,7 @@ class ChatConsumeTest(AsyncWebsocketConsumer):
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({"message": message}))
+        
 class ChatConsumerUserTest(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
