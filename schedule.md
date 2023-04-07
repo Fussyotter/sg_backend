@@ -15,3 +15,7 @@
 # ok so i set up an internal messaging system that works, this will be fine for now but I'd still like real time chat by due date. -->
 
 # need to set up pallet stock and the internal conversion from order size to supply required.  ie. need 36801234 in an order and 10000 -->
+
+
+# 4/7/23
+#  For the weekend -   Set up params for gift query to open ai.  set up input form component.  redo models to store gift ideas to user.  websocket chat will be next week along with styling.  note to myself for weekend.  you can ping open ai through postman right now.  you can talk to django on the nextjs front end at the same time. i'm not sure why i can do that when googling told me i'd be out of luck with double auth headers but big shrugs letsgo.(for now)
