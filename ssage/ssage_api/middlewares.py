@@ -3,17 +3,16 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 
-
+#  unnecessary
+#  stack overflow solution to problem
 class TokenAuthenticationMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):
         async def inner():
-            # Get the token from the request header
             token = request.META.get('HTTP_AUTHORIZATION')
 
-            # Authenticate the user using the token
             if token:
                 # Verify the token
                 try:

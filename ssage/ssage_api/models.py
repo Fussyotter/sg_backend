@@ -10,7 +10,7 @@ class Order(models.Model):
     total = models.IntegerField(
         default=0, null=True, blank=True, verbose_name='Total Count')
     user = models.ManyToManyField(User)
-    completed = models.BooleanField()
+    # completed = models.BooleanField()
     def __str__(self): return self.productName
 
 

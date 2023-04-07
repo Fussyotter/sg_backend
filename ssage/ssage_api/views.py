@@ -30,7 +30,13 @@ class OrderList(generics.ListCreateAPIView):
 
     def perform_create(self,serializer):
         serializer.save(user=[self.request.user])
-@login_required
+
+
+class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+# @login_required
 class OrdersByUserView(APIView):
     def get(self,request, username):
         orders = Order.objects.filter(user__username=username)
