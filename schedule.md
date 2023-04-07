@@ -13,3 +13,5 @@
 #  <class 'ssage_api.admin.MessageInline'>: (admin.E202) 'ssage_api.Message' has more than one ForeignKey to 'auth.User'. You must specify a 'fk_name' attribute.
 # solved with fk_name = 'sender' in messageInline "solved"
 # ok so i set up an internal messaging system that works, this will be fine for now but I'd still like real time chat by due date. -->
+
+# need to set up pallet stock and the internal conversion from order size to supply required.  ie. need 36801234 in an order and 10000 -->
