@@ -32,9 +32,26 @@ class Message(models.Model):
         User, on_delete=models.CASCADE, related_name='received_messages', null=True)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    is_seen = models.BooleanField(default=False)
+
 
     class Meta:
         ordering = ['-timestamp']
 
     def __str__(self):
         return self.content
+
+#  useless, tried to use chatgpt to help and got nonsense
+# class Conversation(models.Model):
+#     user1 = models.ForeignKey(
+#         User, on_delete=models.CASCADE, related_name='conversations1')
+#     user2 = models.ForeignKey(
+#         User, on_delete=models.CASCADE, related_name='conversations2')
+#     is_seen = models.BooleanField(default=False)
+
+
+#     def get_other_user(self, current_user):
+#         if self.user1 == current_user:
+#             return self.user2
+#         else:
+#             return self.user1
