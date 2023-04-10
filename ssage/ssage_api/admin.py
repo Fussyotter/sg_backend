@@ -26,7 +26,7 @@ class OrderInline(admin.TabularInline):
 
 class MessageInline(admin.TabularInline):
     model = Message
-    fields = ['content','recipient', 'timestamp']
+    fields = ['content','recipient', 'timestamp', 'is_seen']
     readonly_fields = ['timestamp']
     extra = 0
     fk_name = 'sender'
@@ -34,6 +34,10 @@ class MessageInline(admin.TabularInline):
 class CustomUserAdmin(UserAdmin):
     inlines = [OrderInline, MessageInline]
 
+
+# @admin.register(Conversation)
+# class ConversationAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'user1', 'user2')
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)

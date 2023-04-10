@@ -30,10 +30,30 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ['id', 'sender_username',
-                  'recipient', 'content', 'timestamp']
+                  'recipient', 'content', 'timestamp','is_seen']
 
     def create(self, validated_data):
         recipient_username = validated_data.pop('recipient_username')
         recipient = User.objects.get(username=recipient_username)
         message = Message.objects.create(recipient=recipient, **validated_data)
         return message
+#   TESTING CONVERSATION SERIALIZER
+
+
+# class ConversationSerializer(serializers.ModelSerializer):
+#     other_user = serializers.SerializerMethodField()
+
+#     class Meta:
+#         model = Conversation
+#         fields = ('id', 'other_user', 'is_seen')
+
+#     def get_other_user(self, obj):
+#         request_user = self.context['request'].user
+#         if obj.user1 == request_user:
+#             return obj.user2.username
+#         else:
+#             return obj.user1.username
+class MessageUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['is_seen']

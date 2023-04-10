@@ -9,8 +9,11 @@ urlpatterns = [
     path('v1/', include('djoser.urls.authtoken')),
     path('ws/', include(routing.websocket_urlpatterns)),
     path('chat/<str:recipient_username>/', views.ChatView.as_view()),
+    path('chat/inbox/', views.InboxView.as_view()),
+    path('messages/<int:message_id>/seen/', views.MessageUpdateView.as_view()),
     path('orders/', views.OrderList.as_view()),
     path('orders/<int:pk>', views.OrderDetail.as_view()),
+
 ]
 
 
