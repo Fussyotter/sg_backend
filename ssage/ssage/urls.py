@@ -22,7 +22,7 @@ from ssage_api import routing
 
 urlpatterns = [
     path('', include('ssage_api.urls')),
-    path('ws/', include(routing.websocket_urlpatterns)),
+    # path('ws/', include(routing.websocket_urlpatterns)),
     path('admin/', admin.site.urls),
    
 

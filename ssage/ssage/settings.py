@@ -62,7 +62,9 @@ MIDDLEWARE = [
     # 'ssage_api.middlewares.TokenAuthenticationMiddleware'
 ]
 CORS_ALLOW_ALL_ORIGINS = True
-
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',  # Add the URL of your Next.js app
+]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
