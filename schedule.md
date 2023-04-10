@@ -19,3 +19,7 @@
 
 # 4/7/23
 #  For the weekend -   Set up params for gift query to open ai.  set up input form component.  redo models to store gift ideas to user.  websocket chat will be next week along with styling.  note to myself for weekend.  you can ping open ai through postman right now.  you can talk to django on the nextjs front end at the same time. i'm not sure why i can do that when googling told me i'd be out of luck with double auth headers but big shrugs letsgo.(for now)
+
+
+# 4/10/23
+# message view changed to show back and forth.   need to show real time updates on click to simulate realtime until websockets working
