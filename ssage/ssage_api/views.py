@@ -76,20 +76,17 @@ class ChatView(APIView):
             sender=request.user, recipient=recipient, content=content, timestamp=timezone.now())
         serializer = MessageSerializer(message)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    # get_messages isn't showing received messages only sent
+    # get_messages
 
-    def get_messages(self, recipient_username):
-        sender = self.request.user
-        recipient = self.get_user(recipient_username)
+    def get_messages(self):
+        user = self.request.user
         messages = Message.objects.filter(
-            (Q(sender=sender) & Q(recipient=recipient)) | (
-                Q(sender=recipient) & Q(recipient=sender)) | (
-                Q(sender=recipient) & Q(recipient=sender))
+            Q(sender=user) | Q(recipient=user)
         ).order_by('timestamp')
         return messages
 
     def get(self, request, recipient_username):
-        messages = self.get_messages(recipient_username)
+        messages = self.get_messages()
         serializer = MessageSerializer(messages, many=True)
         return Response(serializer.data)
 
