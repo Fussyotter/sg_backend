@@ -14,6 +14,13 @@ class Order(models.Model):
     def __str__(self): return self.productName
 
 
+class Gift(models.Model):
+    giftName = models.CharField(max_length=255)
+    description = models.TextField()
+    price = models.CharField(max_length=255)
+    link = models.URLField(max_length=255)
+    alternativeLink = models.URLField(max_length=255)
+
 class Supply(models.Model):
     productName = models.CharField(max_length=100)
     productCode = models.CharField(max_length=150)

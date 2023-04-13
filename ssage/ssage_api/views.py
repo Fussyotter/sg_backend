@@ -9,8 +9,8 @@ from django.http import Http404, HttpResponseBadRequest, JsonResponse
 from django.db.models import Q
 from  django.views.decorators.csrf import csrf_exempt
 
-from .serializers import OrderSerializer, SupplySerializer, MessageSerializer, MessageUpdateSerializer
-from .models import Order, Supply, Message
+from .serializers import OrderSerializer, SupplySerializer, MessageSerializer, MessageUpdateSerializer, GiftSerializer
+from .models import Order, Supply, Message, Gift
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -32,6 +32,12 @@ class OrderList(generics.ListCreateAPIView):
         serializer.save(user=[self.request.user])
 
 
+class GiftList(generics.ListCreateAPIView):
+    queryset = Gift.objects.all()
+    serializer_class = GiftSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=[self.request.user])
 class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer

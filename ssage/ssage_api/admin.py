@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
-from .models import Order, Supply, Message
+from .models import Order, Supply, Message, Gift
 # Register your models here.
 
 
@@ -15,7 +15,9 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('productName', 'productCode', 'total',)
 
 
-
+@admin.register(Gift)
+class GiftAdmin(admin.ModelAdmin):
+    list_display = ('giftName', 'price',)
 
 class OrderInline(admin.TabularInline):
     model = Order.user.through

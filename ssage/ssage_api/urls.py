@@ -13,13 +13,13 @@ urlpatterns = [
     path('messages/<int:message_id>/seen/', views.MessageUpdateView.as_view()),
     path('orders/', views.OrderList.as_view()),
     path('orders/<int:pk>', views.OrderDetail.as_view()),
+    path('gifts/', views.GiftList.as_view()),
 
 ]
 
-
-    # path("chat/", views.ChatView.as_view(), name="index"),
-    # TESTING ROUTES BELOW
-    # path('chat/<str:recipient_username>/',
-    #      TemplateView.as_view(template_name='chat/chat_test.html'), name='chat_test'),
-    # path('send-message/<str:recipient_username>/',
-    #      send_message, name='send_message'),
+# path("chat/", views.ChatView.as_view(), name="index"),
+# TESTING ROUTES BELOW
+# path('chat/<str:recipient_username>/',
+#      TemplateView.as_view(template_name='chat/chat_test.html'), name='chat_test'),
+# path('send-message/<str:recipient_username>/',
+#      send_message, name='send_message'),

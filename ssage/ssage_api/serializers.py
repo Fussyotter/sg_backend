@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Order, Supply, Message
+from .models import Order, Supply, Message, Gift
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,6 +15,11 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
         rep['user'] = [str(user) for user in instance.user.all()]
         return rep
 
+
+class GiftSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gift
+        fields = '__all__'
 
 class SupplySerializer(serializers.HyperlinkedModelSerializer):
         class Meta:
