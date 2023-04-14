@@ -42,9 +42,20 @@ class MessageSerializer(serializers.ModelSerializer):
         recipient = User.objects.get(username=recipient_username)
         message = Message.objects.create(recipient=recipient, **validated_data)
         return message
+
+
+class MessageUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['is_seen']
+
+
+class MessageDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['is_seen']
+
 #   TESTING CONVERSATION SERIALIZER
-
-
 # class ConversationSerializer(serializers.ModelSerializer):
 #     other_user = serializers.SerializerMethodField()
 
@@ -58,7 +69,3 @@ class MessageSerializer(serializers.ModelSerializer):
 #             return obj.user2.username
 #         else:
 #             return obj.user1.username
-class MessageUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Message
-        fields = ['is_seen']

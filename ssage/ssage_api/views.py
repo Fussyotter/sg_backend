@@ -187,3 +187,24 @@ class MessageUpdateView(generics.UpdateAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+    
+
+class MessageDeleteView(generics.DestroyAPIView):
+    queryset = Message.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        message_id = self.kwargs['message_id']
+        try:
+            message = Message.objects.get(id=message_id)
+            if message.sender != self.request.user:
+                raise PermissionDenied(
+                    'You are not authorized to delete this message.')
+            return message
+        except Message.DoesNotExist:
+            raise Http404
+
+    def delete(self, request, *args, **kwargs):
+        message = self.get_object()
+        message.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
